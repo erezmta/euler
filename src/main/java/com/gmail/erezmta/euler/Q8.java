@@ -30,7 +30,6 @@ public class Q8 {
 				}
 
 				if (max < product) {
-					System.out.println(latestDigits);
 					max = product;
 				}
 			}
