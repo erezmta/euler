@@ -1,6 +1,5 @@
 package com.gmail.erezmta.euler;
 
-import java.text.NumberFormat;
 
 public class Q6 {
 
