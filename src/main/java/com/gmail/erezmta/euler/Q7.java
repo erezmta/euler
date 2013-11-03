@@ -1,7 +1,6 @@
 package com.gmail.erezmta.euler;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.gmail.erezmta.euler.utils.PrimeBuilder;
 
 public class Q7 {
 
@@ -12,25 +11,10 @@ public class Q7 {
 	}
 
 	public double prime() {
-		List<Double> primes = new ArrayList<Double>(primeNumber);
-
-		double number = 2;
-		while(primes.size() < this.primeNumber) {
-			boolean isPrime = true;
-			for(int i = 0; i < primes.size(); i++) {
-				if(number % primes.get(i) == 0) {
-					isPrime = false;
-					break;
-				}
-			}
-			
-			if(isPrime) {
-				primes.add(number);
-			}
-			number++;
-		}
-		
-		return primes.get(this.primeNumber - 1);
+		return new PrimeBuilder().
+				calcPrimesUntil(this.primeNumber).
+				getPrimes().
+				get(this.primeNumber - 1);
 	}
 
 }
