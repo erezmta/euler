@@ -12,7 +12,7 @@ public class Q7 {
 
 	public double prime() {
 		return new PrimeBuilder().
-				calcPrimesUntil(this.primeNumber).
+				calcNPrimes(this.primeNumber).
 				getPrimes().
 				get(this.primeNumber - 1);
 	}
