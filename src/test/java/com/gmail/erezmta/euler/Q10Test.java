@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-public class TestQ10 {
+public class Q10Test {
 
 	@Test
 	public void testSumPrimesBelow10() {
@@ -22,5 +22,6 @@ public class TestQ10 {
 				142_913_828_922D, 
 				new Q10(2_000_000).sumOfPrimesBelow(),
 				0d);
+		Date end = new Date();
 	}
 }
