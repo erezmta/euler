@@ -1,12 +1,13 @@
 package com.gmail.erezmta.euler;
 
 import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+
+import com.gmail.erezmta.euler.utils.IOUtils;
 
 public class Q8 {
 	private static final int NUM_OF_DIGITS = 5;
@@ -64,19 +65,9 @@ public class Q8 {
 		} catch (IOException e) {
 			throw new RuntimeException("Error reading the file", e);
 		} finally {
-			closeSilently(buffer);
-			closeSilently(reader);
-			closeSilently(fis);
-		}
-	}
-
-	private void closeSilently(Closeable closable) {
-		if(closable != null) {
-			try {
-				closable.close();
-			} catch (IOException e) {
-				//Ignore
-			}
+			IOUtils.closeSilently(buffer);
+			IOUtils.closeSilently(reader);
+			IOUtils.closeSilently(fis);
 		}
 	}
 
