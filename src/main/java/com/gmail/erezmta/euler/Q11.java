@@ -27,14 +27,15 @@ public class Q11 {
 				Coordinate c = matrix.new Coordinate(x, y);
 				for (CoordinateDeltaOption option : matrix.getOptions()) {
 
-					List<Coordinate> coordinates = option.generatedCoordinates(c);
-					if(coordinates == null) break;
-					
-					long product = 
-							coordinates.get(0).getVal() *
-							coordinates.get(1).getVal() *
-							coordinates.get(2).getVal() *
-							coordinates.get(3).getVal();
+					List<Coordinate> coordinates = option
+							.generatedCoordinates(c);
+					if (coordinates == null)
+						break;
+
+					long product = coordinates.get(0).getVal()
+							* coordinates.get(1).getVal()
+							* coordinates.get(2).getVal()
+							* coordinates.get(3).getVal();
 					if (max < product) {
 						max = product;
 					}
@@ -70,35 +71,23 @@ public class Q11 {
 
 		private void calculateOptions() {
 			options = new ArrayList<>();
-			
-			for(Direction direction1 : Direction.values()) {
-				for(Direction direction2 : Direction.values()) {
-					for(Direction direction3 : Direction.values()) {
-						CoordinateDeltaOption option = 
-								new CoordinateDeltaOption(direction1, direction2, direction3);
-						
-						if(option.isValid()) {
-							options.add(option);
-						}
-					}
+
+			for (Direction direction1 : Direction.values()) {
+				CoordinateDeltaOption option = new CoordinateDeltaOption(
+						direction1, direction1, direction1);
+
+				if (option.isValid()) {
+					options.add(option);
 				}
-				
+
 			}
 		}
-		
+
 		public static enum Direction {
-			UP			( 0, -1),
-			DOWN		( 0,  1),
-			RIGHT		(+1,  0),
-			LEFT		(-1,  0),
-			UP_RIGHT	(+1, -1),
-			UP_LEFT		(-1,  -1),
-			DOWN_RIGHT  (+1,  +1),
-			DOWN_LEFT   (-1,  +1),
-			;
-			
+			DOWN(0, 1), RIGHT(+1, 0), DOWN_RIGHT(+1, +1), DOWN_LEFT(-1, +1), ;
+
 			int xDelta, yDelta;
-			
+
 			private Direction(int xDelta, int yDelta) {
 				this.xDelta = xDelta;
 				this.yDelta = yDelta;
@@ -109,13 +98,14 @@ public class Q11 {
 			private static final int NUMBER_OF_NUMBERS = 4;
 			private final List<Coordinate> coordinatesDelta;
 
-			public CoordinateDeltaOption(Direction ...directions) {
+			public CoordinateDeltaOption(Direction... directions) {
 				int numberOfDeltas = NUMBER_OF_NUMBERS - 1;
-				if(directions.length != numberOfDeltas) {
-					throw new RuntimeException(
-							String.format("Expected %d directions, but got: %d", numberOfDeltas, directions.length));
+				if (directions.length != numberOfDeltas) {
+					throw new RuntimeException(String.format(
+							"Expected %d directions, but got: %d",
+							numberOfDeltas, directions.length));
 				}
-				
+
 				coordinatesDelta = new ArrayList<Coordinate>(numberOfDeltas);
 				Coordinate previousCoordinate = new Coordinate(0, 0);
 				for (Direction direction : directions) {
@@ -127,22 +117,26 @@ public class Q11 {
 			}
 
 			public boolean isValid() {
-				return new HashSet<>(coordinatesDelta).size() == coordinatesDelta.size();
+				return new HashSet<>(coordinatesDelta).size() == coordinatesDelta
+						.size();
 			}
-			
+
 			public List<Coordinate> generatedCoordinates(Coordinate c) {
-				Coordinate c1 = Matrix.this.new Coordinate(c, coordinatesDelta.get(0));
+				Coordinate c1 = Matrix.this.new Coordinate(c,
+						coordinatesDelta.get(0));
 				if (c1.isInValid())
 					return null;
 
-				Coordinate c2 = Matrix.this.new Coordinate(c, coordinatesDelta.get(1));
+				Coordinate c2 = Matrix.this.new Coordinate(c,
+						coordinatesDelta.get(1));
 				if (c2.isInValid())
 					return null;
 
-				Coordinate c3 = Matrix.this.new Coordinate(c, coordinatesDelta.get(2));
+				Coordinate c3 = Matrix.this.new Coordinate(c,
+						coordinatesDelta.get(2));
 				if (c3.isInValid())
 					return null;
-				
+
 				return Arrays.asList(c, c1, c2, c3);
 			}
 		}
@@ -151,7 +145,7 @@ public class Q11 {
 			public void readMatrixFromFile(String filename) {
 				URL url = this.getClass().getClassLoader()
 						.getResource(filename);
-				
+
 				matrix = new ArrayList<List<Integer>>();
 
 				Scanner scanner;
@@ -159,9 +153,10 @@ public class Q11 {
 					File file = new File(url.getFile());
 					scanner = new Scanner(file);
 				} catch (FileNotFoundException e) {
-					throw new RuntimeException("Cannot file the file: " + url.getFile());
+					throw new RuntimeException("Cannot file the file: "
+							+ url.getFile());
 				}
-				
+
 				try {
 					while (scanner.hasNextLine()) {
 						List<Integer> line = new ArrayList<Integer>();
