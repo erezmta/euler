@@ -1,4 +1,4 @@
-package com.gmail.erezmta.euler;
+package com.gmail.erezmta.euler.google;
 
 import java.util.Arrays;
 import java.util.HashMap;
