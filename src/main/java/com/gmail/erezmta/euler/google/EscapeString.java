@@ -23,8 +23,6 @@ public class EscapeString {
 	}
 
 	private static String escapeChar(char c) {
-		int charAsInt = (int) c;
-		
 		return String.format("\\%03o", (int)c);
 	}
 }
